@@ -5,6 +5,13 @@ import router from './router'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
+// 导入css
+import './assets/css/base.css'
+
+// 导入api
+import api from '@/api'
+Vue.prototype.$http = api
+
 Vue.use(Vant);
 
 Vue.config.productionTip = false
