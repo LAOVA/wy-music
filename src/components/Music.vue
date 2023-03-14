@@ -4,7 +4,7 @@
     <div class="wrap">
       <div class="title">编辑推荐</div>
       <div class="content">
-        <van-row gutter="5">
+        <van-row gutter="4">
           <van-col span="8" v-for="item in list" :key="item.id">
             <div class="item">
               <img :src="item.picUrl" alt="">
@@ -12,8 +12,16 @@
               <div class="info">{{ item.name }}</div>
             </div>
           </van-col>
-
         </van-row>
+        <!-- <van-grid :border="false" :column-num="3">
+          <van-grid-item v-for="item in list" :key="item.id">
+            <div class="item">
+              <img :src="item.picUrl" alt="">
+              <div class="total"><van-icon name="fire-o" />{{ item.playCount | turn }}万</div>
+              <div class="info">{{ item.name }}</div>
+            </div>
+          </van-grid-item>
+        </van-grid> -->
       </div>
     </div>
   </div>
@@ -33,12 +41,11 @@ export default {
     async getPsnMusic() {
       let res = await this.$http.getPsnMusicAPI(6)
       this.list = res.data.result
-      console.log(this.list);
     }
   },
   filters: {
     turn(val) {
-      return parseInt(val / 10000)
+      return (val / 10000).toFixed(1)
     }
   }
 
@@ -66,6 +73,8 @@ export default {
 }
 
 .content {
+  width: 100%;
+
   .item {
     position: relative;
 
@@ -90,5 +99,13 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
+
+  .van-col {
+    height: 3.6rem;
+  }
+}
+
+/deep/ .van-grid-item__content {
+  padding: 0 2px;
 }
 </style>
