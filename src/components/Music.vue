@@ -36,11 +36,17 @@ export default {
   },
   created() {
     this.getPsnMusic()
+    this.getHotMusic()
   },
   methods: {
     async getPsnMusic() {
       let res = await this.$http.getPsnMusicAPI(6)
       this.list = res.data.result
+    },
+    async getHotMusic() {
+      let res = await this.$http.getHotMusicAPI(6)
+      this.list = res.data.result
+      console.log(res);
     }
   },
   filters: {
