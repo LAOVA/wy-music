@@ -31,14 +31,19 @@
           <div class="left">
             <div class="subtitle">{{ item.name }}<span class="sgalia">{{ item.song.alias[0] }}</span></div>
             <div class="author">
-              <van-icon name="vip-card-o" color="orange" /> <span class="ele" v-for="ele in item.song.artists"
-                :key="ele.id">{{ ele.name }}</span> - <span>{{ item.name }}</span>
+              <van-icon name="vip-card-o" color="Coral" /> <span class="ele" v-for="ele in item.song.artists"
+                :key="ele.id">{{ ele.name }}</span> - <span>{{ item.song.album.name }}</span>
             </div>
           </div>
           <div class="right"><van-icon name="play-circle-o" size="26" color="#888" /></div>
         </div>
 
       </div>
+    </div>
+    <div class="ftwrap">
+      <div class="ftTitle"><van-icon name="music" class="logo" size="47" color="#d43c33" />网易云音乐</div>
+      <div class="app">打开APP，发现更多好音乐 ></div>
+      <p>网易公司版权所有©1997-2023 杭州乐读科技有限公司运营</p>
     </div>
   </div>
 </template>
@@ -61,9 +66,8 @@ export default {
       this.list = res.data.result
     },
     async getNewMusic() {
-      let res = await this.$http.getNewMusicAPI(6)
+      let res = await this.$http.getNewMusicAPI()
       this.newSongs = res.data.result
-      console.log(this.newSongs);
     }
   },
   filters: {
@@ -77,8 +81,10 @@ export default {
 
 <style lang="less" scoped>
 .wrap {
+  padding-top: .3rem;
+
   .title {
-    margin: .3rem 0;
+    margin-bottom: .3rem;
     font-size: .34rem;
     position: relative;
     padding-left: .2rem;
@@ -130,10 +136,12 @@ export default {
 }
 
 .list {
+  padding: 0 8px;
+
   .item {
     display: flex;
     border-bottom: 1px solid #eee;
-    padding: 10px 0 10px 10px;
+    padding: 6px 0;
 
     .left {
       flex: 1;
@@ -161,12 +169,11 @@ export default {
           &::after {
             content: " / ";
           }
-
         }
 
-        .ele:last-child {
+        .ele:nth-last-child(2) {
           &::after {
-            content: " / ";
+            content: "";
           }
         }
       }
@@ -180,6 +187,39 @@ export default {
       text-align: center;
     }
 
+  }
+}
+
+.ftwrap {
+  margin-top: 4px;
+  height: 200px;
+  background: url(https://s3.music.126.net/mobile-new/img/recommand_bg_2x.png?d045fafc60e017b653f8065a87496922=) no-repeat;
+  background-size: contain;
+  text-align: center;
+
+  .ftTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 60px;
+    font-size: 34px;
+    letter-spacing: 4px;
+  }
+
+  .app {
+    line-height: 38px;
+    border: 1px solid #d33a31;
+    border-radius: 38px;
+    font-size: 16px;
+    color: #d33a31;
+    margin: 15px 37px 5px;
+  }
+
+  p {
+    color: #888;
+    font-size: 12px;
+    line-height: 16px;
+    transform: scale(.75);
   }
 }
 
