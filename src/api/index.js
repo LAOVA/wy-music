@@ -15,7 +15,7 @@ const api = {
       }
     })
   },
-  getHotMusicAPI() {
+  getNewMusicAPI() {
     return request.post('/foo/weapi/personalized/newsong', param)
   }
 }
