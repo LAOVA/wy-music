@@ -84,7 +84,7 @@ export default {
 }
 
 /deep/ .van-tabs--line .van-tabs__wrap {
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 2px solid #dbdbdb75;
   position: fixed;
   top: 1.68rem;
   width: 100%;

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="root">
+    <!-- 热播图 -->
     <div class="hotop">
       <div class="box">
         <div class="cloud hoticon">
@@ -7,6 +8,7 @@
         <p class="time">更新日期：{{ Time }}</p>
       </div>
     </div>
+    <!-- 热播歌曲 -->
     <div class="list" v-for="(item, index) in list" :key="item.id">
       <span class="No">{{ index > 8 ? index + 1 : '0' + (index + 1) }}</span>
       <div class="item">
@@ -21,6 +23,7 @@
       </div>
 
     </div>
+    <!-- 查看更多 -->
     <div class="more">
       查看完整榜单 >
     </div>
@@ -63,6 +66,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.root {
+  background-color: #fcfcfd;
+  height: 100vh;
+}
+
 .hotop {
   position: relative;
   display: flex;

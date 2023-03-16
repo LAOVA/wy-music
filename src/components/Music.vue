@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root">
     <!-- 编辑音乐 -->
     <div class="wrap">
       <div class="title">编辑推荐</div>
@@ -80,6 +80,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.root {
+  background-color: #fcfcfd;
+  height: 100vh;
+}
+
 .wrap {
   padding-top: .3rem;
 
@@ -137,6 +142,7 @@ export default {
 
 .list {
   padding: 0 8px;
+  background-color: #fcfcfd;
 
   .item {
     display: flex;
