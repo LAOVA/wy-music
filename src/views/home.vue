@@ -23,9 +23,9 @@
 
 <script>
 // 导入tabs组件
-import Music from '../components/Music.vue'
-import HotMusic from '../components/HotMusic.vue'
-import Search from '../components/Search.vue'
+import Music from './Music.vue'
+import HotMusic from './HotMusic.vue'
+import Search from './Search.vue'
 
 export default {
   data() {

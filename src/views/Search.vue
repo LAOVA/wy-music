@@ -3,20 +3,22 @@
     <!-- 搜索框 -->
     <div class="search">
       <!-- <input type="text" class="inp"> -->
-      <van-search value="" shape="round" placeholder="搜索歌曲、歌手、专辑" focus="true" background="#fcfcfd" />
+      <van-search v-model="inpVal" shape="round" placeholder="搜索歌曲、歌手、专辑" focus="true" background="#fcfcfd"
+        @input="valchange" />
     </div>
 
     <!-- 热门搜索 -->
-    <div class="hot-search">
+    <div class="hot-search" v-if="isShow">
       <div class="title">热门搜索</div>
       <ul class="wrap">
-        <li class="musicName" v-for="(item, index) in list" :key="index">{{ item.first }}</li>
+        <li class="musicName" v-for="(item, index) in hots" :key="index">{{ item.first }}</li>
       </ul>
     </div>
 
     <!-- 搜索列表 -->
-    <div class="search-list">
-      <div class="info">名称</div>
+    <div class="search-list" v-if="!isShow">
+      <div class="name">搜索 "{{ inpVal }}"</div>
+      <div class="info" v-for="item in list" :key="item.keyword">{{ item.keyword }}</div>
     </div>
   </div>
 </template>
@@ -25,6 +27,9 @@
 export default {
   data() {
     return {
+      hots: [],
+      isShow: true,
+      inpVal: '',
       list: []
     }
   },
@@ -34,8 +39,27 @@ export default {
   methods: {
     async getHotSearch() {
       let res = await this.$http.getHotSearchAPI()
-      this.list = res.data.result.hots
-      console.log(this.list);
+      this.hots = res.data.result.hots
+    },
+    async getSearch(keywords) {
+      let res = await this.$http.getSearchAPI({
+        keywords,
+        type: 'mobile'
+      })
+      if (res.data.code == 200) {
+        this.list = res.data.result.allMatch;
+      } else {
+        this.list = []
+      }
+
+    },
+    valchange(value) {
+      if (value) {
+        this.isShow = false
+        this.getSearch(value)
+      } else {
+        this.isShow = true
+      }
     }
   }
 }
@@ -91,6 +115,23 @@ export default {
 
       border-radius: 32px;
     }
+  }
+}
+
+.search-list {
+  .name {
+    color: red;
+    line-height: .9rem;
+    height: .9rem;
+    padding-left: .2rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .info {
+    line-height: .9rem;
+    height: .9rem;
+    padding-left: .2rem;
+    border-bottom: 1px solid #eee;
   }
 }
 </style>

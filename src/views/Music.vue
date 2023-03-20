@@ -7,9 +7,11 @@
         <van-row gutter="3">
           <van-col span="8" v-for="item in list" :key="item.id">
             <div class="item">
-              <img :src="item.picUrl" alt="">
-              <div class="total"><van-icon name="fire-o" />{{ item.playCount | turn }}万</div>
-              <div class="info">{{ item.name }}</div>
+              <router-link :to="/playlist/ + item.id">
+                <img :src="item.picUrl" alt="">
+                <div class="total"><van-icon name="fire-o" />{{ item.playCount | turn }}万</div>
+                <div class="info">{{ item.name }}</div>
+              </router-link>
             </div>
           </van-col>
         </van-row>
@@ -27,17 +29,18 @@
     <div class="wrap">
       <div class="title">最新音乐</div>
       <div class="list">
-        <div class="item" v-for="item in newSongs" :key="item.id">
-          <div class="left">
-            <div class="subtitle">{{ item.name }}<span class="sgalia">{{ item.song.alias[0] }}</span></div>
-            <div class="author">
-              <van-icon name="vip-card-o" color="Coral" /> <span class="ele" v-for="ele in item.song.artists"
-                :key="ele.id">{{ ele.name }}</span> - <span>{{ item.song.album.name }}</span>
+        <div v-for="item in newSongs" :key="item.id">
+          <router-link :to="'/song/' + item.id" class="item">
+            <div class="left">
+              <div class="subtitle">{{ item.name }}<span class="sgalia">{{ item.song.alias[0] }}</span></div>
+              <div class="author">
+                <van-icon name="vip-card-o" color="Coral" /> <span class="ele" v-for="ele in item.song.artists"
+                  :key="ele.id">{{ ele.name }}</span> - <span>{{ item.song.album.name }}</span>
+              </div>
             </div>
-          </div>
-          <div class="right"><van-icon name="play-circle-o" size="26" color="#888" /></div>
+            <div class="right"><van-icon name="play-circle-o" size="26" color="#888" /></div>
+          </router-link>
         </div>
-
       </div>
     </div>
     <div class="ftwrap">
@@ -80,6 +83,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 .root {
   background-color: #fcfcfd;
   height: 100vh;

@@ -18,6 +18,14 @@ module.exports = defineConfig({
         pathRewrite: {
           '^/foo': ''
         }
+      },
+      '/boo': {
+        target: 'https://music.163.com/',
+        ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/boo': ''
+        }
       }
     }
   }

@@ -9,7 +9,14 @@
       </div>
     </div>
     <!-- 热播歌曲 -->
-    <div class="list" v-for="(item, index) in list" :key="item.id">
+    <MusicList :list="list" :isHot="true">
+      <template #code="obj">
+        <span class="No" :class="{ 'text-red': obj.index < 3 }">{{ obj.index > 8 ? obj.index + 1 : '0' + (obj.index + 1)
+        }}</span>
+      </template>
+    </MusicList>
+
+    <!-- <div class="list" v-for="(item, index) in list" :key="item.id">
       <span class="No">{{ index > 8 ? index + 1 : '0' + (index + 1) }}</span>
       <div class="item">
         <div class="left">
@@ -21,8 +28,8 @@
         </div>
         <div class="right"><van-icon name="play-circle-o" size="26" color="#888" /></div>
       </div>
+    </div> -->
 
-    </div>
     <!-- 查看更多 -->
     <div class="more">
       查看完整榜单 >
@@ -31,7 +38,11 @@
 </template>
 
 <script>
+import MusicList from '@/components/MusicList.vue';
 export default {
+  components: {
+    MusicList
+  },
   data() {
     return {
       Time: '',
@@ -66,6 +77,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.text-red {
+  color: #df3436 !important;
+}
+
 .root {
   background-color: #fcfcfd;
   height: 100vh;
@@ -119,80 +134,80 @@ export default {
   }
 }
 
-.list {
-  display: flex;
-  padding-right: 8px;
+// .list {
+//   display: flex;
+//   padding-right: 8px;
 
-  .No {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    font-size: 17px;
-    flex: 1;
-    color: #999;
-  }
+//   .No {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 40px;
+//     font-size: 17px;
+//     flex: 1;
+//     color: #999;
+//   }
 
-  &:nth-child(-n + 4) {
-    .No {
-      color: #df3436;
-    }
-  }
+//   &:nth-child(-n + 4) {
+//     .No {
+//       color: #df3436;
+//     }
+//   }
 
-  .item {
-    flex: 9;
-    display: flex;
-    border-bottom: 1px solid #eee;
-    padding: 6px 0;
+//   .item {
+//     flex: 9;
+//     display: flex;
+//     border-bottom: 1px solid #eee;
+//     padding: 6px 0;
 
-    .left {
-      flex: 1;
+//     .left {
+//       flex: 1;
 
-      .subtitle {
-        font-size: 17px;
+//       .subtitle {
+//         font-size: 17px;
 
-        .sgalia {
-          margin-left: 4px;
-          font-size: 16px;
-          color: #888;
-          // white-space: normal;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
-        }
-      }
+//         .sgalia {
+//           margin-left: 4px;
+//           font-size: 16px;
+//           color: #888;
+//           // white-space: normal;
+//           // overflow: hidden;
+//           // text-overflow: ellipsis;
+//         }
+//       }
 
-      .author {
-        margin-top: 4px;
-        font-size: 12px;
-        color: #888;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        word-break: normal;
+//       .author {
+//         margin-top: 4px;
+//         font-size: 12px;
+//         color: #888;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//         white-space: nowrap;
+//         word-break: normal;
 
-        .ele {
-          &::after {
-            content: " / ";
-          }
-        }
+//         .ele {
+//           &::after {
+//             content: " / ";
+//           }
+//         }
 
-        .ele:nth-last-child(2) {
-          &::after {
-            content: "";
-          }
-        }
-      }
-    }
+//         .ele:nth-last-child(2) {
+//           &::after {
+//             content: "";
+//           }
+//         }
+//       }
+//     }
 
-    .right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      width: .8rem;
-      text-align: center;
-    }
-  }
-}
+//     .right {
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       width: .8rem;
+//       text-align: center;
+//     }
+//   }
+// }
 
 .more {
   height: 55px;
